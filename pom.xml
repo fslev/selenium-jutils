@@ -8,9 +8,19 @@
     <artifactId>selenium-jutils</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <name>Selenium JUtils</name>
+    <description>Selenium Java Utilities</description>
+    <url>https://github.com/fslev/selenium-jutils</url>
+    <developers>
+        <developer>
+            <name>Florin Slevoaca</name>
+            <email>slevoaca.florin@gmail.com</email>
+            <timezone>EEST</timezone>
+        </developer>
+    </developers>
+
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
 </project>
