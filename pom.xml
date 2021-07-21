@@ -21,6 +21,43 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jtest.utils.version>1.43</jtest.utils.version>
+        <selenium.java.min.version>4.0.0-beta-4</selenium.java.min.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.github.fslev</groupId>
+            <artifactId>jtest-utils</artifactId>
+            <version>${jtest.utils.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <scope>provided</scope>
+            <version>[${selenium.java.min.version},)</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>8</release>
+                    <testRelease>11</testRelease>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 </project>
