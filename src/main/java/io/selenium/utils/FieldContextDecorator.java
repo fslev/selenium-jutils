@@ -1,21 +1,18 @@
 package io.selenium.utils;
 
-import org.openqa.selenium.By;
+import io.selenium.utils.handler.ContextLocatingElementHandler;
+import io.selenium.utils.handler.ContextLocatingElementListHandler;
+import io.selenium.utils.handler.InitWebContextWithRetriesHandler;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.Annotations;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
-import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
-import org.openqa.selenium.support.pagefactory.internal.LocatingElementListHandler;
 
 import java.lang.reflect.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FieldContextDecorator implements FieldDecorator {
@@ -28,36 +25,32 @@ public class FieldContextDecorator implements FieldDecorator {
 
     @Override
     public Object decorate(ClassLoader loader, Field field) {
-        if (!(WebElement.class.isAssignableFrom(field.getType())
-                || WebSearchContext.class.isAssignableFrom(field.getType())
-                || isDecoratableList(field))) {
+        if (!(WebElement.class.isAssignableFrom(field.getType()) || WebContext.class.isAssignableFrom(field.getType())
+                || isDecoratableList(field, WebElement.class) || isDecoratableList(field, WebContext.class))) {
             return null;
         }
 
-        ElementLocator locator = factory.createLocator(field);
+        ElementContextLocator locator = factory.createLocator(field);
         if (locator == null) {
             return null;
         }
 
         if (WebElement.class.isAssignableFrom(field.getType())) {
-            return proxyForLocator(loader, locator);
-        } else if (List.class.isAssignableFrom(field.getType())) {
-            return proxyForListLocator(loader, locator);
-        }
-        if (WebSearchContext.class.isAssignableFrom(field.getType())) {
-            return initContext(field);
+            return proxyForElementLocator(loader, locator);
+        } else if (isDecoratableList(field, WebElement.class)) {
+            return proxyForElementListLocator(loader, locator);
+        } else if (WebContext.class.isAssignableFrom(field.getType())) {
+            return initWebContext(loader, field.getType(), locator);
         } else {
             return null;
         }
     }
 
-    protected boolean isDecoratableList(Field field) {
+    protected boolean isDecoratableList(Field field, Class<?> clazz) {
         if (!List.class.isAssignableFrom(field.getType())) {
             return false;
         }
 
-        // Type erasure in Java isn't complete. Attempt to discover the generic
-        // type of the list.
         Type genericType = field.getGenericType();
         if (!(genericType instanceof ParameterizedType)) {
             return false;
@@ -65,7 +58,7 @@ public class FieldContextDecorator implements FieldDecorator {
 
         Type listType = ((ParameterizedType) genericType).getActualTypeArguments()[0];
 
-        if (!WebElement.class.equals(listType)) {
+        if (!clazz.equals(listType)) {
             return false;
         }
 
@@ -74,33 +67,23 @@ public class FieldContextDecorator implements FieldDecorator {
                 field.getAnnotation(FindAll.class) != null;
     }
 
-    protected WebElement proxyForLocator(ClassLoader loader, ElementLocator locator) {
-        InvocationHandler handler = new LocatingElementHandler(locator);
-
-        WebElement proxy;
-        proxy = (WebElement) Proxy.newProxyInstance(
-                loader, new Class[]{WebElement.class, WrapsElement.class, Locatable.class}, handler);
-        return proxy;
+    protected WebElement proxyForElementLocator(ClassLoader loader, ElementContextLocator locator) {
+        InvocationHandler handler = new ContextLocatingElementHandler(locator, factory.getDuration(), factory.getTroubles());
+        return (WebElement) Proxy.newProxyInstance(loader, new Class[]{WebElement.class, WrapsElement.class, Locatable.class}, handler);
     }
 
     @SuppressWarnings("unchecked")
-    protected List<WebElement> proxyForListLocator(ClassLoader loader, ElementLocator locator) {
-        InvocationHandler handler = new LocatingElementListHandler(locator);
-
-        List<WebElement> proxy;
-        proxy = (List<WebElement>) Proxy.newProxyInstance(
-                loader, new Class[]{List.class}, handler);
-        return proxy;
+    protected List<WebElement> proxyForElementListLocator(ClassLoader loader, ElementContextLocator locator) {
+        InvocationHandler handler = new ContextLocatingElementListHandler(locator, factory.getDuration(), factory.getTroubles());
+        return (List<WebElement>) Proxy.newProxyInstance(loader, new Class[]{List.class}, handler);
     }
 
-    protected WebSearchContext initContext(Field field) {
+    protected WebContext initWebContext(ClassLoader loader, Class<?> fieldClass, ElementLocator locator) {
         try {
-            WebSearchContext context = (WebSearchContext) field.getType().getConstructor().newInstance();
-            List<By> byChain = new ArrayList<>(factory.getByChain());
-            byChain.add(new Annotations(field).buildBy());
-            PageFactory.initElements(new ElementContextLocatorFactory(factory.getSearchContext(), byChain), context);
+            WebContext context = (WebContext) fieldClass.getConstructor().newInstance();
+            InitWebContextWithRetriesHandler handler = new InitWebContextWithRetriesHandler(locator, factory.getTroubles(), factory.getDuration());
             return context;
-        } catch (Exception e) {
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
     }

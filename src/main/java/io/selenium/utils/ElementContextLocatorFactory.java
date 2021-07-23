@@ -1,38 +1,32 @@
 package io.selenium.utils;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
 import java.lang.reflect.Field;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ElementContextLocatorFactory implements ElementLocatorFactory {
+public class ElementContextLocatorFactory extends Retry implements ElementLocatorFactory {
 
     protected final SearchContext searchContext;
-    protected final List<By> byChain;
 
     public ElementContextLocatorFactory(SearchContext searchContext) {
-        this(searchContext, new ArrayList<>());
+        this(searchContext, Duration.ofSeconds(0), new ArrayList<>());
     }
 
-    public ElementContextLocatorFactory(SearchContext searchContext, List<By> byChain) {
+    public ElementContextLocatorFactory(SearchContext searchContext, Duration duration, List<Class<? extends Throwable>> troubles) {
+        super(duration, troubles);
         this.searchContext = searchContext;
-        this.byChain = byChain;
     }
 
     @Override
-    public ElementLocator createLocator(Field field) {
-        return new ElementContextLocator(searchContext, byChain, field);
+    public ElementContextLocator createLocator(Field field) {
+        return new ElementContextLocator(searchContext, field, duration, troubles);
     }
 
     public SearchContext getSearchContext() {
         return searchContext;
-    }
-
-    public List<By> getByChain() {
-        return byChain;
     }
 }

@@ -1,0 +1,44 @@
+version: "3"
+services:
+  grocery-list:
+    image: zmad5306/grocery-list-ng:green
+    ports:
+      - "8081:80"
+
+  chrome:
+    image: selenium/node-chrome:4.0.0-rc-1-prerelease-20210618
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=10
+    ports:
+      - "6901:5900"
+      - "7901:7900"
+
+  firefox:
+    image: selenium/node-firefox:4.0.0-rc-1-prerelease-20210618
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=10
+    ports:
+      - "6902:5900"
+      - "7902:7900"
+
+  selenium-hub:
+    image: selenium/hub:4.0.0-rc-1-prerelease-20210618
+    container_name: selenium-hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
