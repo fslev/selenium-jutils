@@ -18,11 +18,11 @@ public abstract class Retry {
         this.troubles = troubles;
     }
 
-    public List<Class<? extends Throwable>> getTroubles() {
+    protected List<Class<? extends Throwable>> getTroubles() {
         return troubles;
     }
 
-    public Duration getDuration() {
+    protected Duration getDuration() {
         return duration;
     }
 }
