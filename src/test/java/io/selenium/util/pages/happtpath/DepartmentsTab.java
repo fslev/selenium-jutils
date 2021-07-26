@@ -1,4 +1,4 @@
-package io.selenium.util.pages;
+package io.selenium.util.pages.happtpath;
 
 import io.selenium.utils.WebContext;
 

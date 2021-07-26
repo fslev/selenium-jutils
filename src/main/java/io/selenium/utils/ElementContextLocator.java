@@ -66,23 +66,19 @@ public class ElementContextLocator extends Retry implements ElementLocator {
     }
 
     public List<WebElement> findProxyElements() {
-
         List<WebElement> elements = findElements();
         List<WebElement> proxyElements = new ArrayList<>();
+
         for (int i = 0; i < elements.size(); i++) {
             proxyElements.add((WebElement) Proxy.newProxyInstance(this.getClass().getClassLoader(),
                     new Class[]{WebElement.class, WrapsElement.class, Locatable.class},
                     new ContextLocatingElementHandler(this, i, duration, troubles)));
         }
 
-        if (shouldCache()) {
-            cachedElementList = elements;
-        }
-
         return proxyElements;
     }
 
-    protected boolean shouldCache() {
+    public boolean shouldCache() {
         return shouldCache;
     }
 

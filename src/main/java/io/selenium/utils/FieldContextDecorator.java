@@ -2,7 +2,7 @@ package io.selenium.utils;
 
 import io.selenium.utils.handler.ContextLocatingElementHandler;
 import io.selenium.utils.handler.ContextLocatingElementListHandler;
-import io.selenium.utils.handler.LocatingWebContextListHandler;
+import io.selenium.utils.handler.WebContextListHandler;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.interactions.Locatable;
@@ -98,7 +98,7 @@ public class FieldContextDecorator implements FieldDecorator {
 
     @SuppressWarnings("unchecked")
     protected List<WebContext> initWebContextList(ClassLoader loader, Field field, ElementContextLocator locator) {
-        InvocationHandler handler = new LocatingWebContextListHandler(field, locator, factory.getDuration(), factory.getTroubles());
+        InvocationHandler handler = new WebContextListHandler(field, locator, factory.getDuration(), factory.getTroubles());
         return (List<WebContext>) Proxy.newProxyInstance(loader, new Class[]{List.class}, handler);
     }
 }

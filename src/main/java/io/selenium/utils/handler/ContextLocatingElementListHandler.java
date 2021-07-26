@@ -20,7 +20,6 @@ public class ContextLocatingElementListHandler extends LocatingWithRetriesHandle
         try {
             return method.invoke(proxyElements, objects);
         } catch (InvocationTargetException e) {
-            // Unwrap the underlying exception
             throw e.getCause();
         }
     }

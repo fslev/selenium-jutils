@@ -1,7 +1,8 @@
-package io.selenium.util.pages;
+package io.selenium.util.pages.cache;
 
 import io.selenium.utils.WebContext;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 public class GroceryListTab extends WebContext {
 
     @FindBy(xpath = ".//li//app-item")
+    @CacheLookup
     private List<Item> items;
 
     public List<Item> getItems() {

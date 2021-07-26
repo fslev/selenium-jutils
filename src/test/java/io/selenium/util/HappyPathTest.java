@@ -1,7 +1,7 @@
 package io.selenium.util;
 
-import io.selenium.util.pages.GroceryListTab;
-import io.selenium.util.pages.GroceryPage;
+import io.selenium.util.pages.happtpath.GroceryListTab;
+import io.selenium.util.pages.happtpath.GroceryPage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,10 +14,9 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
-public class IntegrationTest {
+public class HappyPathTest {
 
     private static final String SELENIUM_HUB_URL = "http://localhost:4444";
     private static final String GROCERY_APP_URL = "http://grocery-list:80";
@@ -44,6 +43,14 @@ public class IntegrationTest {
         assertEquals("Baking item4", list.get(3).getName().getText());
         assertEquals("Baking item5", list.get(4).getName().getText());
         assertEquals("Baking item6", list.get(5).getName().getText());
+    }
+
+    @Test
+    public void checkGroceryListItemsAreNotCached() {
+        GroceryPage groceryPage = new GroceryPage(driver);
+        GroceryListTab.Item item1 = groceryPage.getGroceryListTab().getItems().get(0);
+        GroceryListTab.Item item2 = groceryPage.getGroceryListTab().getItems().get(0);
+        assertNotEquals(item1, item2);
     }
 
     @Test

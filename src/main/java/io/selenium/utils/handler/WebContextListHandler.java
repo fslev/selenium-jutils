@@ -12,11 +12,12 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocatingWebContextListHandler extends LocatingWithRetriesHandler {
+public class WebContextListHandler extends LocatingWithRetriesHandler {
 
     protected Class<?> listType;
+    protected List<WebContext> cachedWebContextList;
 
-    public LocatingWebContextListHandler(Field field, ElementContextLocator locator, Duration duration, List<Class<? extends Throwable>> troubles) {
+    public WebContextListHandler(Field field, ElementContextLocator locator, Duration duration, List<Class<? extends Throwable>> troubles) {
         super(locator, duration, troubles);
         Type genericType = field.getGenericType();
         this.listType = (Class<?>) ((ParameterizedType) genericType).getActualTypeArguments()[0];
@@ -24,6 +25,9 @@ public class LocatingWebContextListHandler extends LocatingWithRetriesHandler {
 
     @Override
     protected Object proxyInvoke(Object object, Method method, Object[] objects) throws Throwable {
+        if (locator.shouldCache() && cachedWebContextList != null) {
+            return method.invoke(cachedWebContextList, objects);
+        }
         List<WebElement> proxyElements = locator.findProxyElements();
         List<WebContext> webContexts = new ArrayList<>();
         try {
@@ -32,9 +36,11 @@ public class LocatingWebContextListHandler extends LocatingWithRetriesHandler {
                 PageFactory.initElements(new FieldContextDecorator(new ElementContextLocatorFactory(proxyElement, duration, troubles)), context);
                 webContexts.add(context);
             }
+            if (locator.shouldCache()) {
+                cachedWebContextList = webContexts;
+            }
             return method.invoke(webContexts, objects);
         } catch (InvocationTargetException e) {
-            // Unwrap the underlying exception
             throw e.getCause();
         }
     }

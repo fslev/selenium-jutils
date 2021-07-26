@@ -43,7 +43,6 @@ public class ContextLocatingElementHandler extends LocatingWithRetriesHandler {
         try {
             return method.invoke(element, objects);
         } catch (InvocationTargetException e) {
-            // Unwrap the underlying exception
             throw e.getCause();
         }
     }
