@@ -16,9 +16,9 @@ public class ContextLocatingElementListHandler extends LocatingWithRetriesHandle
 
     @Override
     protected Object proxyInvoke(Object object, Method method, Object[] objects) throws Throwable {
-        List<WebElement> elements = locator.findProxyElements();
+        List<WebElement> proxyElements = locator.findProxyElements();
         try {
-            return method.invoke(elements, objects);
+            return method.invoke(proxyElements, objects);
         } catch (InvocationTargetException e) {
             // Unwrap the underlying exception
             throw e.getCause();

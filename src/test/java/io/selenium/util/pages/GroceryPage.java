@@ -4,18 +4,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 public class GroceryPage extends BasePage {
 
     @FindBy(xpath = "//h1")
     private WebElement pageTitle;
 
-//    @FindBy(xpath = "//app-list")
-//    private GroceryListContext groceryListContext;
+    @FindBy(xpath = "//app-list")
+    private GroceryListTab groceryListTab;
 
-    @FindBy(xpath = "//app-list//li")
-    private List<WebElement> itemList;
+    @FindBy(xpath = "//app-departments")
+    private DepartmentsTab departmentsTab;
+
+    @FindBy(xpath = "//app-list-invalid")
+    private GroceryListTab invalidGroceryTab;
 
     public GroceryPage(WebDriver driver) {
         super(driver);
@@ -25,11 +26,15 @@ public class GroceryPage extends BasePage {
         return pageTitle;
     }
 
-    public List<WebElement> getItemList() {
-        return itemList;
+    public GroceryListTab getGroceryListTab() {
+        return groceryListTab;
     }
 
-    //    public GroceryListContext getGroceryListContext() {
-//        return groceryListContext;
-//    }
+    public DepartmentsTab getDepartmentsTab() {
+        return departmentsTab;
+    }
+
+    public GroceryListTab getInvalidGroceryListTab() {
+        return invalidGroceryTab;
+    }
 }

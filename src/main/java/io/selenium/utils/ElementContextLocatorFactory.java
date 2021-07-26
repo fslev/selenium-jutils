@@ -25,8 +25,4 @@ public class ElementContextLocatorFactory extends Retry implements ElementLocato
     public ElementContextLocator createLocator(Field field) {
         return new ElementContextLocator(searchContext, field, duration, troubles);
     }
-
-    public SearchContext getSearchContext() {
-        return searchContext;
-    }
 }

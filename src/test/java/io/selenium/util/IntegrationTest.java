@@ -1,11 +1,11 @@
 package io.selenium.util;
 
+import io.selenium.util.pages.GroceryListTab;
 import io.selenium.util.pages.GroceryPage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -15,6 +15,7 @@ import java.time.Duration;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class IntegrationTest {
 
@@ -27,27 +28,35 @@ public class IntegrationTest {
     public void init() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
         driver = new RemoteWebDriver(new URL(SELENIUM_HUB_URL), options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(45));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get(GROCERY_APP_URL);
     }
 
     @Test
-    public void addGroceryListItem() {
+    public void checkGroceryListItems() {
         GroceryPage groceryPage = new GroceryPage(driver);
         assertEquals("Grocery List", groceryPage.getPageTitle().getText());
-        System.out.println("1");
-        List<WebElement> list=groceryPage.getItemList();
-        System.out.println("2");
-        list.size();
-        System.out.println("3");
-//        WebElement element=list.get(0);
-        System.out.println("3a");
-//        System.out.println(element.getText());
-        System.out.println("4");
-        System.out.println(list.size());
-        System.out.println(list.get(5).getText());
-//        String text = groceryPage.getGroceryListContext().getListElementContext().getItem().getText();
-//        System.out.println(text);
+        List<GroceryListTab.Item> list = groceryPage.getGroceryListTab().getItems();
+        assertEquals(6, list.size());
+        assertEquals("Baking item1", list.get(0).getName().getText());
+        assertEquals("Baking item2", list.get(1).getName().getText());
+        assertEquals("Baking item3", list.get(2).getName().getText());
+        assertEquals("Baking item4", list.get(3).getName().getText());
+        assertEquals("Baking item5", list.get(4).getName().getText());
+        assertEquals("Baking item6", list.get(5).getName().getText());
+    }
+
+    @Test
+    public void checkGroceryListItems_invalidContextLocator() {
+        GroceryPage groceryPage = new GroceryPage(driver);
+        assertEquals("Grocery List", groceryPage.getPageTitle().getText());
+        List<GroceryListTab.Item> list = groceryPage.getInvalidGroceryListTab().getItems();
+        try {
+            list.size();
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            return;
+        }
+        fail("Invalid Grocery List Context should fail with NoSuchElementException");
     }
 
     @After

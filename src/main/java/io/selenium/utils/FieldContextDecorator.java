@@ -2,14 +2,14 @@ package io.selenium.utils;
 
 import io.selenium.utils.handler.ContextLocatingElementHandler;
 import io.selenium.utils.handler.ContextLocatingElementListHandler;
-import io.selenium.utils.handler.InitWebContextWithRetriesHandler;
+import io.selenium.utils.handler.LocatingWebContextListHandler;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.pagefactory.ElementLocator;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
 import java.lang.reflect.*;
@@ -40,13 +40,15 @@ public class FieldContextDecorator implements FieldDecorator {
         } else if (isDecoratableList(field, WebElement.class)) {
             return proxyForElementListLocator(loader, locator);
         } else if (WebContext.class.isAssignableFrom(field.getType())) {
-            return initWebContext(loader, field.getType(), locator);
+            return initWebContext(loader, field, locator);
+        } else if (isDecoratableList(field, WebContext.class)) {
+            return initWebContextList(loader, field, locator);
         } else {
             return null;
         }
     }
 
-    protected boolean isDecoratableList(Field field, Class<?> clazz) {
+    protected static boolean isDecoratableList(Field field, Class<?> aClass) {
         if (!List.class.isAssignableFrom(field.getType())) {
             return false;
         }
@@ -56,9 +58,13 @@ public class FieldContextDecorator implements FieldDecorator {
             return false;
         }
 
-        Type listType = ((ParameterizedType) genericType).getActualTypeArguments()[0];
+        Class<?> listType = (Class<?>) ((ParameterizedType) genericType).getActualTypeArguments()[0];
 
-        if (!clazz.equals(listType)) {
+        if (!aClass.equals(WebElement.class) && !aClass.equals(WebContext.class)) {
+            return false;
+        } else if (aClass.equals(WebElement.class) && !aClass.equals(listType)) {
+            return false;
+        } else if (aClass.equals(WebContext.class) && !aClass.isAssignableFrom(listType)) {
             return false;
         }
 
@@ -78,13 +84,21 @@ public class FieldContextDecorator implements FieldDecorator {
         return (List<WebElement>) Proxy.newProxyInstance(loader, new Class[]{List.class}, handler);
     }
 
-    protected WebContext initWebContext(ClassLoader loader, Class<?> fieldClass, ElementLocator locator) {
+    protected WebContext initWebContext(ClassLoader loader, Field field, ElementContextLocator locator) {
         try {
-            WebContext context = (WebContext) fieldClass.getConstructor().newInstance();
-            InitWebContextWithRetriesHandler handler = new InitWebContextWithRetriesHandler(locator, factory.getTroubles(), factory.getDuration());
+            WebContext context = (WebContext) field.getType().getConstructor().newInstance();
+            WebElement contextElement = proxyForElementLocator(loader, locator);
+            PageFactory.initElements(new FieldContextDecorator(
+                    new ElementContextLocatorFactory(contextElement, factory.getDuration(), factory.getTroubles())), context);
             return context;
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    protected List<WebContext> initWebContextList(ClassLoader loader, Field field, ElementContextLocator locator) {
+        InvocationHandler handler = new LocatingWebContextListHandler(field, locator, factory.getDuration(), factory.getTroubles());
+        return (List<WebContext>) Proxy.newProxyInstance(loader, new Class[]{List.class}, handler);
     }
 }
