@@ -62,6 +62,7 @@ public class GroceryListTab extends WebContext {
 }
 
 public static class Item extends WebContext {
+    
     @FindBy(css = "span")
     private WebElement text;
     @FindBy(xpath = ".//button[text()='Remove']")
