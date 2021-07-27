@@ -80,7 +80,7 @@ assertEquals("Baking item1", itemList.get(0).getName().getText());
 list.get(3).getRemoveButton().click();
 assertEquals(5, itemList.size());
 ```
-#### Behind the scenes:
+### Behind the scenes
 ```java
 new GroceryPage(driver).getGroceryListTab().getItems().get(2).getName()
 ```
@@ -91,3 +91,7 @@ driver.findElement(By.xpath("//app-list"))
           .get(2)
              .getName()
 ```
+Behind the scenes, the web elements you get, are nothing but Java proxies which are locating the corresponding element, each time you call any of its methods.  
+It preserves the default behaviour and features of Selenium Page Factory:  
+https://github.com/SeleniumHQ/selenium/wiki/PageFactory
+
