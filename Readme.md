@@ -30,7 +30,7 @@ Selenium-JUtils uses the _selenium-java_ library. Set it inside your project, in
 ```
 
 # How to use
-Decorate your Page Object Model class instance using the FieldContextDecorator.class:  
+Decorate your Page Object class instance using PageFactory and FieldContextDecorator:  
 ```java
 public class BasePage {
     protected WebDriver driver;
