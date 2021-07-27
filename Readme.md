@@ -37,8 +37,7 @@ public class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(new FieldContextDecorator(
-                        new ElementContextLocatorFactory(driver)), this);
+        PageFactory.initElements(new FieldContextDecorator(new ElementContextLocatorFactory(driver)), this);
     }
 }
 ```
