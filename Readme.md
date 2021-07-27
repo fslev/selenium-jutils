@@ -29,7 +29,51 @@ Selenium-JUtils uses the _selenium-java_ library. Set it inside your project, in
 </dependency>
 ```
 
+# How to use
+Decorate your Page Object Model class instance using the FieldContextDecorator.class:  
+```java
+public class BasePage {
+    protected WebDriver driver;
+
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(new FieldContextDecorator(new ElementContextLocatorFactory(driver)), this);
+    }
+}
+```
+
 # Features
 
 ## WebContext
-Lorem ipsum
+You can group WebElements under the same class which extends WebContext and each element will be located relative to the search context of the class.  
+_Example:_
+
+```java
+public class GroceryPage extends BasePage {
+
+    @FindBy(xpath = "//app-list")
+    private GroceryListTab groceryListTab;
+}
+
+public class GroceryListTab extends WebContext {
+
+    @FindBy(xpath = ".//li//app-item")
+    private List<Item> items;
+}
+
+public static class Item extends WebContext {
+    @FindBy(css = "span")
+    private WebElement text;
+    @FindBy(xpath = ".//button[text()='Remove']")
+    private WebElement removeButton;
+} 
+```
+See how easy is to retrieve all grocery list items:
+```java
+GroceryPage groceryPage = new GroceryPage(driver);
+List<Item> itemList = groceryPage.getGroceryListTab().getItems();
+
+assertEquals(6, itemList.size());
+assertEquals("Baking item1", itemList.get(0).getName().getText());
+```
+
