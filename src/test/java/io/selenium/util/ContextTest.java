@@ -16,6 +16,7 @@ import java.time.Duration;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class ContextTest {
 
@@ -43,6 +44,10 @@ public class ContextTest {
         assertEquals("Remove", removeButton.getText());
         removeButton.click();
         assertEquals(5, departmentsList.size());
+
+        // Also check noContext fields are null
+        assertNull(departmentsTab.getNoContext());
+        assertNull(departmentsTab.getNoContexts());
     }
 
     @After

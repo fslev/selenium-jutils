@@ -8,11 +8,25 @@ import java.util.List;
 
 public class DepartmentsTab extends WebContext {
 
-    @FindBy(xpath = ".//li")
+    @FindBy(xpath = "//li")
     private List<Department> departments;
+
+    @FindBy(xpath = ".//li")
+    private List<NoContext> noContexts;
+
+    @FindBy(xpath = ".//li")
+    private NoContext noContext;
 
     public List<Department> getDepartments() {
         return departments;
+    }
+
+    public List<NoContext> getNoContexts() {
+        return noContexts;
+    }
+
+    public NoContext getNoContext() {
+        return noContext;
     }
 
     public static class Department extends WebContext {
@@ -31,5 +45,9 @@ public class DepartmentsTab extends WebContext {
                 return button;
             }
         }
+    }
+
+    public static class NoContext {
+
     }
 }
