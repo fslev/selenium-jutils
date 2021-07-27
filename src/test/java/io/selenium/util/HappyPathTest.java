@@ -134,7 +134,7 @@ public class HappyPathTest {
     @After
     public void cleanup() {
         if (driver != null) {
-            driver.close();
+            driver.quit();
         }
     }
 }

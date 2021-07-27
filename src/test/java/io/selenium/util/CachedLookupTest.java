@@ -78,7 +78,7 @@ public class CachedLookupTest {
     @After
     public void cleanup() {
         if (driver != null) {
-            driver.close();
+            driver.quit();
         }
     }
 }
