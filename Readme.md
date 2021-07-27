@@ -95,7 +95,7 @@ Behind the scenes, the web element(s) you get, are nothing but Java proxies whic
 It preserves the default behaviour and features of Selenium Page Factory: https://github.com/SeleniumHQ/selenium/wiki/PageFactory
 
 ## Retry on error
-There is a possibility that after locating the web element(s) but before interacting with it, the DOM gets refreshed, in which case you will receive a StaleElementReferenceException.  
+There is a possibility that after locating the web element(s) but before interacting with it, the DOM gets refreshed, in which case you will receive a _StaleElementReferenceException_.  
 ```java
 new GroceryPage(driver).getGroceryListTab().getItems().get(2)
         // <-- DOM is refreshed
@@ -109,7 +109,7 @@ driver.findElement(By.xpath("//app-list"))
             // <-- DOM is refreshed 
             .findElement(By.cssSelector("span"))
 ```
-=> StaleElementReferenceException  
+=> _StaleElementReferenceException_  
 
 The retry on error mechanism tackles this problem by trying to locate the web element again if any specific error occurs.  
 In order to activate it, use the ElementContextLocatorFactory with a specified List of Throwables on which web element location should be retried and a timeout duration.
