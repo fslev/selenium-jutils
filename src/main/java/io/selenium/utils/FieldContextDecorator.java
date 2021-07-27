@@ -92,7 +92,7 @@ public class FieldContextDecorator implements FieldDecorator {
                     new ElementContextLocatorFactory(contextElement, factory.getDuration(), factory.getTroubles())), context);
             return context;
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Cannot create instance from : " + field.getType(), e);
         }
     }
 

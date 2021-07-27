@@ -11,8 +11,15 @@ public class GroceryListTab extends WebContext {
     @FindBy(xpath = ".//li//app-item")
     private List<Item> items;
 
+    @FindBy(xpath = ".//div[@_ngcontent-c1=''][2]")
+    private ItemInput itemInput;
+
     public List<Item> getItems() {
         return items;
+    }
+
+    public ItemInput getItemInput() {
+        return itemInput;
     }
 
     public static class Item extends WebContext {
@@ -33,6 +40,19 @@ public class GroceryListTab extends WebContext {
 
         public WebElement getToggleButton() {
             return toggleButton;
+        }
+    }
+
+    public static class ItemInput extends WebContext {
+
+        @FindBy(xpath = ".//input")
+        private WebElement inputBox;
+        @FindBy(xpath = ".//button")
+        private WebElement addButton;
+
+        public void addItem(String name) {
+            inputBox.sendKeys(name);
+            addButton.click();
         }
     }
 }
