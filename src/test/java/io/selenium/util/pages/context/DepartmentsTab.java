@@ -11,6 +11,9 @@ public class DepartmentsTab extends WebContext {
     @FindBy(xpath = "//li")
     private List<Department> departments;
 
+    @FindBy(xpath = "//li")
+    private List<DepartmentInvalid> invaliDepartments;
+
     @FindBy(xpath = ".//li")
     private List<NoContext> noContexts;
 
@@ -19,6 +22,14 @@ public class DepartmentsTab extends WebContext {
 
     public List<Department> getDepartments() {
         return departments;
+    }
+
+    public List<DepartmentInvalid> getInvaliDepartments() {
+        return invaliDepartments;
+    }
+
+    public void setInvaliDepartments(List<DepartmentInvalid> invaliDepartments) {
+        this.invaliDepartments = invaliDepartments;
     }
 
     public List<NoContext> getNoContexts() {
@@ -43,6 +54,21 @@ public class DepartmentsTab extends WebContext {
 
             public WebElement getButton() {
                 return button;
+            }
+        }
+    }
+
+    public static class DepartmentInvalid extends WebContext {
+        @FindBy(xpath = ".//app-department")
+        private List<ContentInvalid> contents;
+
+        public List<ContentInvalid> getContents() {
+            return contents;
+        }
+
+        public static class ContentInvalid extends WebContext {
+            public ContentInvalid(String s) {
+
             }
         }
     }

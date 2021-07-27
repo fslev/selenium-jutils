@@ -2,6 +2,7 @@ package io.selenium.util;
 
 import io.selenium.util.pages.context.DepartmentsTab;
 import io.selenium.util.pages.context.GroceryPage;
+import io.selenium.util.pages.context.InvalidGroceryPage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,8 +16,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 public class ContextTest {
 
@@ -48,6 +48,24 @@ public class ContextTest {
         // Also check noContext fields are null
         assertNull(departmentsTab.getNoContext());
         assertNull(departmentsTab.getNoContexts());
+    }
+
+
+    @Test
+    public void checkWebContextWithOneArgumentConstructor() {
+        GroceryPage groceryPage = new GroceryPage(driver);
+        List<DepartmentsTab.DepartmentInvalid> invalidDepartments = groceryPage.getDepartmentsTab().getInvaliDepartments();
+        try {
+            invalidDepartments.get(0).getContents().size();
+            fail("Should fail. WebContext with one argument constructor");
+        } catch (RuntimeException e) {
+        }
+        try {
+            new InvalidGroceryPage(driver);
+            fail("Should fail. WebContext with one argument constructor");
+        } catch (RuntimeException e) {
+            assertTrue(e.getMessage().contains("Cannot create instance from"));
+        }
     }
 
     @After
