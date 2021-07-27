@@ -28,3 +28,8 @@ Selenium-JUtils uses the _selenium-java_ library. Set it inside your project, in
    <version>${selenium.java.version}</version>
 </dependency>
 ```
+
+# Features
+
+## WebContext
+Lorem ipsum
