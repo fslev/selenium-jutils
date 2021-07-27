@@ -80,4 +80,14 @@ assertEquals("Baking item1", itemList.get(0).getName().getText());
 list.get(3).getRemoveButton().click();
 assertEquals(5, itemList.size());
 ```
-
+#### Behind the scenes:
+```java
+new GroceryPage(driver).getGroceryListTab().getItems().get(2).getName()
+```
+==>
+```java
+driver.findElement(By.xpath("//app-list"))
+        .findElements(By.xpath(".//li//app-item"))
+          .get(2)
+             .getName()
+```
