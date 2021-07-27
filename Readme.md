@@ -7,3 +7,24 @@ A light Java library designed to tackle the shortcomings of Selenium Page Object
 It provides the following enhancements:
 - WebContext, used for locating web elements relative to a parent element  
 - Retry on error mechanism, used when an error or exception occurs while locating a web element, such as StaleElementReferenceException.  
+
+### Maven Central
+```
+<dependency>
+   <groupId>io.github.fslev</groupId>
+   <artifactId>selenium-jutils</artifactId>
+   <version>${latest.version}</version>
+</dependency>
+
+Gradle: compile("io.github.fslev:selenium-jutils:${latest.version}")
+```  
+
+### Required dependencies
+Selenium-JUtils uses the 'selenium-java' library. Choose your desired dependency version and set it inside your project:
+```
+<dependency>
+   <groupId>org.seleniumhq.selenium</groupId>
+   <artifactId>selenium-java</artifactId>
+   <version>${selenium.java.version}</version>
+</dependency>
+```
