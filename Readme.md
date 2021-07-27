@@ -117,6 +117,7 @@ The retry on error mechanism tackles these problems by trying to locate the web 
 In order to activate it, instantiate the _ElementContextLocatorFactory_ with a specified List of errors or exceptions, upon which web element localisation and interaction should be retried, and a duration timeout. 
 ```java
 PageFactory.initElements(new FieldContextDecorator(new ElementContextLocatorFactory(
-                driver, Duration.ofSeconds(20), Collections.singletonList(StaleElementReferenceException.class, ElementNotSelectableException.class ))), this);
+                driver, Duration.ofSeconds(20), Collections.singletonList(StaleElementReferenceException.class, 
+                    ElementNotSelectableException.class ))), this);
 
 ```
