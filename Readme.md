@@ -124,6 +124,10 @@ PageFactory.initElements(new FieldContextDecorator(new ElementContextLocatorFact
 
 ## Details
 Please take a look over the project tests in order to get a clearer picture on how the WebContext and Retry on error mechanism work.  
+You need to start the Selenium Grid and the Grocery application via the docker compose from _src/test/resources_:
+```
+docker-compose -f selenium-grid.yml up
+```
 
 ## Other features
 It comes with [**jtest-utils**](https://github.com/fslev/jtest-utils), which is a friendly library used for matching different types of objects, for making HTTP requests, SQL database queries, etc.  
