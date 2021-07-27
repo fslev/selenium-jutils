@@ -64,7 +64,7 @@ public class GroceryListTab extends WebContext {
 public static class Item extends WebContext {
     
     @FindBy(css = "span")
-    private WebElement text;
+    private WebElement name;
     @FindBy(xpath = ".//button[text()='Remove']")
     private WebElement removeButton;
 } 
@@ -76,5 +76,8 @@ List<Item> itemList = groceryPage.getGroceryListTab().getItems();
 
 assertEquals(6, itemList.size());
 assertEquals("Baking item1", itemList.get(0).getName().getText());
+// Remove 4th item
+list.get(3).getRemoveButton().click();
+assertEquals(5, itemList.size());
 ```
 

@@ -24,14 +24,14 @@ public class GroceryListTab extends WebContext {
 
     public static class Item extends WebContext {
         @FindBy(css = "span")
-        private WebElement text;
+        private WebElement name;
         @FindBy(xpath = ".//button[text()='Remove']")
         private WebElement removeButton;
         @FindBy(xpath = ".//button[text()='Toggle']")
         private WebElement toggleButton;
 
         public WebElement getName() {
-            return text;
+            return name;
         }
 
         public WebElement getRemoveButton() {
