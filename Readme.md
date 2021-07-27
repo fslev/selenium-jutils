@@ -20,7 +20,7 @@ Gradle: compile("io.github.fslev:selenium-jutils:${latest.version}")
 ```  
 
 ### Required dependencies
-Selenium-JUtils uses the _selenium-java_ library. Set it inside your project, along the _selenium-jutils_ dependency:  
+Selenium-JUtils uses the _selenium-java_ library. Set it inside your project, in addition to the _selenium-jutils_ dependency:  
 ```
 <dependency>
    <groupId>org.seleniumhq.selenium</groupId>
