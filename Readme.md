@@ -69,7 +69,7 @@ public static class Item extends WebContext {
     private WebElement removeButton;
 } 
 ```
-See how easy is to retrieve all grocery list items:
+See how easy is to retrieve grocery list items:
 ```java
 GroceryPage groceryPage = new GroceryPage(driver);
 List<Item> itemList = groceryPage.getGroceryListTab().getItems();
