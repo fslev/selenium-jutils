@@ -89,7 +89,7 @@ new GroceryPage(driver).getGroceryListTab().getItems().get(2).getName()
 driver.findElement(By.xpath("//app-list"))
         .findElements(By.xpath(".//li//app-item"))
           .get(2)
-             .getName()
+            .findElement(By.cssSelector("span"))
 ```
 Behind the scenes, the web elements you get, are nothing but Java proxies which are locating the corresponding element, each time you call any of its methods.
 It preserves the default behaviour and features of Selenium Page Factory: https://github.com/SeleniumHQ/selenium/wiki/PageFactory
