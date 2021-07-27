@@ -95,7 +95,7 @@ Behind the scenes, the web element(s) you get, are nothing but Java proxies whic
 It preserves the default behaviour and features of Selenium Page Factory: https://github.com/SeleniumHQ/selenium/wiki/PageFactory
 
 ## Retry on error
-There is a possibility that after locating the web element(s) but before interacting with it, the DOM gets refreshed, in which case you will receive a _StaleElementReferenceException_.  
+There is a possibility that after locating a web element(s) but before interacting with it, the DOM gets refreshed, in which case you will receive a _StaleElementReferenceException_.  
 ```java
 new GroceryPage(driver).getGroceryListTab().getItems().get(2)
         // <-- DOM is refreshed
