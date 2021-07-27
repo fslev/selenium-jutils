@@ -29,4 +29,4 @@ jobs:
         run: mvn clean test -B -Pcoveralls jacoco:report coveralls:report -Djacoco=true -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
       - name: Stop Selenium grid
         if: always()
-        run: docker logs selenium-hub && docker-compose -f src/test/resources/selenium-grid.yml down
+        run: docker-compose -f src/test/resources/selenium-grid.yml down
