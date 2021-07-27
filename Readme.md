@@ -122,7 +122,7 @@ PageFactory.initElements(new FieldContextDecorator(new ElementContextLocatorFact
 
 ```
 
-## Details
+## In detail...
 Please take a look over the project tests in order to get a clearer picture on how the WebContext and Retry on error mechanism work.  
 You need to start the Selenium Grid and the Grocery application via docker compose, from _src/test/resources_:
 ```
