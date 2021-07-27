@@ -91,7 +91,7 @@ driver.findElement(By.xpath("//app-list"))
           .get(2)
             .findElement(By.cssSelector("span"))
 ```
-Behind the scenes, the web element(s) you get, are nothing but Java proxies which are first locating the corresponding element every time you call any of its methods.
+Behind the scenes, the web element(s) you get, are nothing but Java proxies which are first locating the corresponding element every time you interact with it.
 It preserves the default behaviour and features of Selenium Page Factory: https://github.com/SeleniumHQ/selenium/wiki/PageFactory
 
 ## Retry on error
