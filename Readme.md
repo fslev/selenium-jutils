@@ -121,3 +121,7 @@ PageFactory.initElements(new FieldContextDecorator(new ElementContextLocatorFact
                     ElementNotSelectableException.class ))), this);
 
 ```
+
+## Other features
+It comes with [**jtest-utils**](https://github.com/fslev/jtest-utils), which is a friendly library used for matching different types of objects, for making HTTP requests or SQL database queries.  
+
