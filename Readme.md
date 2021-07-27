@@ -112,7 +112,7 @@ driver.findElement(By.xpath("//app-list"))
 => _StaleElementReferenceException_  
 
 The retry on error mechanism tackles this problem by trying to locate the web element again if any specific error occurs.  
-In order to activate it, instantiate the _ElementContextLocatorFactory_ with a specified List of Throwables upon which web element localisation should be retried and a timeout duration.
+In order to activate it, instantiate the _ElementContextLocatorFactory_ with a specified List of Throwables upon which web element localisation should be retried and a duration timeout.
 ```java
 PageFactory.initElements(new FieldContextDecorator(new ElementContextLocatorFactory(
                 driver, Duration.ofSeconds(20), Collections.singletonList(StaleElementReferenceException.class))), this);
