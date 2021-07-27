@@ -22,7 +22,7 @@ jobs:
           java-version: 11
           distribution: 'adopt'
       - name: Start Selenium grid
-        run: docker-compose -f src/test/resources/selenium-grid.yml up -d --build
+        run: docker-compose -f src/test/resources/selenium-grid.yml up -d
       - name: Build with Maven
         env:
           COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
