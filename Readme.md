@@ -92,6 +92,5 @@ driver.findElement(By.xpath("//app-list"))
              .getName()
 ```
 Behind the scenes, the web elements you get, are nothing but Java proxies which are locating the corresponding element, each time you call any of its methods.
-It preserves the default behaviour and features of Selenium Page Factory:  
-https://github.com/SeleniumHQ/selenium/wiki/PageFactory
+It preserves the default behaviour and features of Selenium Page Factory: https://github.com/SeleniumHQ/selenium/wiki/PageFactory
 
