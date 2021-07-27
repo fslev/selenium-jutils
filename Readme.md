@@ -5,8 +5,8 @@
 
 A light Java library designed to tackle the shortcomings of Selenium Page Object Model and Page Factory features.  
 It provides the following enhancements:
-- WebContext, used for locating web elements relative to a parent element  
-- Retry on error mechanism, used when an error or exception occurs while locating a web element, such as StaleElementReferenceException.  
+- __WebContext__, used for locating web elements relative to a parent element  
+- __Retry on error mechanism__, used when an error or exception occurs while locating a web element, such as StaleElementReferenceException.  
 
 ### Maven Central
 ```
