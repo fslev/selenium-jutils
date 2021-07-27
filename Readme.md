@@ -45,7 +45,7 @@ public class BasePage {
 # Features
 
 ## WebContext
-You can group WebElements under the same class which extends WebContext and each element will be located relative to the search context of the class.  
+You can group WebElements or other context classes under the same class which extends WebContext and each element will be located relative to the search context of the class.  
 __Example:__
 
 ```java
