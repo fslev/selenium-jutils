@@ -132,5 +132,7 @@ docker-compose -f selenium-grid.yml up
 ## Other features
 It comes with [**jtest-utils**](https://github.com/fslev/jtest-utils), which is a friendly library used for matching different types of objects, for making HTTP requests, SQL database queries, etc.  
 
-
+## Showcase
+This [**tutorial**](https://github.com/fslev/cucumber-selenium-tutorial)
+shows you how to test a website with Selenium and Cucumber for Java
 
