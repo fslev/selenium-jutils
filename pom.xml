@@ -4,7 +4,7 @@
 
     <groupId>io.github.fslev</groupId>
     <artifactId>selenium-jutils</artifactId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
 
     <name>Selenium JUtils</name>
     <description>Selenium Java Utilities</description>
@@ -200,7 +200,7 @@
         <connection>scm:git:ssh://git@github.com/fslev/selenium-jutils.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/fslev/selenium-jutils.git</developerConnection>
         <url>https://github.com/fslev/selenium-jutils/tree/main</url>
-        <tag>selenium-jutils-1.1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
