@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GroceryListTab extends WebContext {
 
-    @FindBy(xpath = ".//li//app-item")
+    @FindBy(xpath = ".//li")
     private List<Item> items;
 
     @FindBy(xpath = ".//div[@_ngcontent-c1=''][2]")
@@ -29,6 +29,8 @@ public class GroceryListTab extends WebContext {
         private WebElement removeButton;
         @FindBy(xpath = ".//button[text()='Toggle']")
         private WebElement toggleButton;
+        @FindBy(xpath = ".//app-item")
+        private WebElement itemWebElement;
 
         public WebElement getName() {
             return name;
@@ -40,6 +42,10 @@ public class GroceryListTab extends WebContext {
 
         public WebElement getToggleButton() {
             return toggleButton;
+        }
+
+        public WebElement getItemWebElement() {
+            return itemWebElement;
         }
     }
 

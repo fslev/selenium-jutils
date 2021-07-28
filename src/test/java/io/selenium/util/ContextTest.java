@@ -53,13 +53,20 @@ public class ContextTest {
     }
 
     @Test
-    public void getContext() {
+    public void contextSearch() {
         GroceryPage groceryPage = new GroceryPage(driver);
         GroceryListTab groceryListTab = groceryPage.getGroceryListTab();
         List<GroceryListTab.Item> list = groceryListTab.getItems();
         GroceryListTab.Item item = list.get(2);
         assertEquals("Baking item3", item.getName().getText());
+        // Get search context and find elements relative to it
         assertEquals("Baking item3", item.getSearchContext().findElement(By.cssSelector("span")).getText());
+        assertEquals("Baking item3", item.getItemWebElement().findElement(By.xpath("span")).getText());
+
+        // Get item web element and find elements relative to it
+        item = list.get(3);
+        assertEquals("Baking item4", item.getSearchContext().findElement(By.cssSelector("span")).getText());
+        assertEquals("Baking item4", item.getItemWebElement().findElement(By.xpath("span")).getText());
     }
 
 
