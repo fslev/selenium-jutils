@@ -114,7 +114,7 @@ driver.findElement(By.xpath("//app-list"))
 Or maybe the element cannot be selected for a very short period of time, in which case you get _ElementNotSelectableException_.
 
 The __retry on error__ mechanism tackles these problems by locating the web element again, if any specific error occurs.
-In order to activate it, instantiate the _ElementContextLocatorFactory_ with a specified List of errors or exceptions, upon which web element localisation and interaction should be retried, and a duration timeout. 
+In order to activate it, instantiate the _ElementContextLocatorFactory_ with a specific List of errors or exceptions, upon which web element localisation and interaction should be retried, and a duration timeout. 
 ```java
 PageFactory.initElements(new FieldContextDecorator(new ElementContextLocatorFactory(
                 driver, Duration.ofSeconds(20), Arrays.asList(StaleElementReferenceException.class, 
