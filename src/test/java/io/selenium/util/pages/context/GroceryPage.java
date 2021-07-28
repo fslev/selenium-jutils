@@ -15,6 +15,9 @@ public class GroceryPage extends BasePage {
     @FindBy(xpath = "//app-departments")
     private DepartmentsTab departmentsTab;
 
+    @FindBy(xpath = "//app-list")
+    private GroceryListTab groceryListTab;
+
     public GroceryPage(WebDriver driver) {
         super(driver);
     }
@@ -22,5 +25,10 @@ public class GroceryPage extends BasePage {
     public DepartmentsTab getDepartmentsTab() {
         tabs.get(1).click();
         return departmentsTab;
+    }
+
+    public GroceryListTab getGroceryListTab() {
+        tabs.get(0).click();
+        return groceryListTab;
     }
 }

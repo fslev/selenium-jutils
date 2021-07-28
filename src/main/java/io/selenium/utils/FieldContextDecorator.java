@@ -88,6 +88,7 @@ public class FieldContextDecorator implements FieldDecorator {
         try {
             WebContext context = (WebContext) field.getType().getConstructor().newInstance();
             WebElement contextElement = proxyForElementLocator(loader, locator);
+            context.setSearchContext(contextElement);
             PageFactory.initElements(new FieldContextDecorator(
                     new ElementContextLocatorFactory(contextElement, factory.getDuration(), factory.getTroubles())), context);
             return context;

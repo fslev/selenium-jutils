@@ -33,6 +33,7 @@ public class WebContextListHandler extends LocatingWithRetriesHandler {
         try {
             for (WebElement proxyElement : proxyElements) {
                 WebContext context = (WebContext) listType.getConstructor().newInstance();
+                context.setSearchContext(proxyElement);
                 PageFactory.initElements(new FieldContextDecorator(new ElementContextLocatorFactory(proxyElement, duration, troubles)), context);
                 webContexts.add(context);
             }

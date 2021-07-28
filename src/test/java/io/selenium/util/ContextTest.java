@@ -1,11 +1,13 @@
 package io.selenium.util;
 
 import io.selenium.util.pages.context.DepartmentsTab;
+import io.selenium.util.pages.context.GroceryListTab;
 import io.selenium.util.pages.context.GroceryPage;
 import io.selenium.util.pages.context.InvalidGroceryPage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -48,6 +50,16 @@ public class ContextTest {
         // Also check noContext fields are null
         assertNull(departmentsTab.getNoContext());
         assertNull(departmentsTab.getNoContexts());
+    }
+
+    @Test
+    public void getContext() {
+        GroceryPage groceryPage = new GroceryPage(driver);
+        GroceryListTab groceryListTab = groceryPage.getGroceryListTab();
+        List<GroceryListTab.Item> list = groceryListTab.getItems();
+        GroceryListTab.Item item = list.get(2);
+        assertEquals("Baking item3", item.getName().getText());
+        assertEquals("Baking item3", item.getSearchContext().findElement(By.cssSelector("span")).getText());
     }
 
 
