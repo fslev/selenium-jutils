@@ -12,6 +12,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -66,7 +68,9 @@ public class ContextTest {
         // Get item web element and find elements relative to it
         item = list.get(3);
         assertEquals("Baking item4", item.getSearchContext().findElement(By.cssSelector("span")).getText());
-        assertEquals("Baking item4", item.getItemWebElement().findElement(By.xpath("span")).getText());
+        assertEquals("Baking item4", item.getItemWebElement().findElement(By.xpath("./span")).getText());
+        assertEquals("Baking item4", ((WebDriver) item.getSearchContext()).findElement(By.cssSelector("span")).getText());
+        new WebDriverWait((WebDriver) item.getSearchContext(), Duration.ofSeconds(5)).until(ExpectedConditions.textToBe(By.cssSelector("span"), "Baking item4"));
     }
 
 

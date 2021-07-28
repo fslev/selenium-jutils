@@ -1,10 +1,7 @@
 package io.selenium.utils;
 
 import io.selenium.utils.handler.ContextLocatingElementHandler;
-import org.openqa.selenium.By;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WrapsElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.support.pagefactory.AbstractAnnotations;
 import org.openqa.selenium.support.pagefactory.Annotations;
@@ -71,7 +68,7 @@ public class ElementContextLocator extends Retry implements ElementLocator {
 
         for (int i = 0; i < elements.size(); i++) {
             proxyElements.add((WebElement) Proxy.newProxyInstance(this.getClass().getClassLoader(),
-                    new Class[]{WebElement.class, WrapsElement.class, Locatable.class},
+                    new Class[]{WebElement.class, WrapsElement.class, Locatable.class, WebDriver.class},
                     new ContextLocatingElementHandler(this, i, duration, troubles)));
         }
 
