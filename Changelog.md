@@ -4,7 +4,7 @@
 Update dependencies (Optimized Polling - jtest-utils)  
 
 ### 1.2
-Add WebDriver interface to proxy supported interfaces  
+Added WebDriver interface to proxy supported interfaces  
 
 ### 1.1
 Added SearchContext to WebContext class  
