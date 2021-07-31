@@ -16,6 +16,6 @@ public class BasePage {
     public BasePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new FieldContextDecorator(new ElementContextLocatorFactory(
-                driver, Duration.ofSeconds(20), Collections.singletonList(StaleElementReferenceException.class))), this);
+                driver, Duration.ofSeconds(12), Collections.singletonList(StaleElementReferenceException.class))), this);
     }
 }

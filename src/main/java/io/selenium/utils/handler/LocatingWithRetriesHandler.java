@@ -1,5 +1,6 @@
 package io.selenium.utils.handler;
 
+import io.jtest.utils.exceptions.PollingTimeoutException;
 import io.jtest.utils.polling.Polling;
 import io.selenium.utils.ElementContextLocator;
 import io.selenium.utils.Retry;
@@ -22,7 +23,7 @@ public abstract class LocatingWithRetriesHandler extends Retry implements Invoca
     @Override
     public Object invoke(Object object, Method method, Object[] objects) throws Throwable {
         AtomicReference<Object> result = new AtomicReference<>();
-        Throwable throwable = new Polling<Throwable>().duration(duration, POLLING_INTERVAL_MILLIS)
+        Polling<Throwable> polling = new Polling<Throwable>().duration(duration, POLLING_INTERVAL_MILLIS)
                 .supplier(() -> {
                     try {
                         result.set(proxyInvoke(object, method, objects));
@@ -33,12 +34,17 @@ public abstract class LocatingWithRetriesHandler extends Retry implements Invoca
                         }
                         return t;
                     }
-                }).until(t -> t == null || !troubles.contains(t.getClass())).get();
-
-        if (throwable == null) {
-            return result.get();
+                }).until(t -> t == null || !troubles.contains(t.getClass()));
+        try {
+            Throwable throwable = polling.get();
+            if (throwable == null) {
+                return result.get();
+            } else {
+                throw throwable;
+            }
+        } catch (PollingTimeoutException e) {
+            throw polling.getLastResult();
         }
-        throw throwable;
     }
 
     protected abstract Object proxyInvoke(Object object, Method method, Object[] objects) throws Throwable;

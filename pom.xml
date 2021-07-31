@@ -19,7 +19,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jtest.utils.version>1.43</jtest.utils.version>
+        <jtest.utils.version>1.45</jtest.utils.version>
         <selenium.java.min.version>4.0.0-beta-4</selenium.java.min.version>
     </properties>
 
@@ -137,6 +137,7 @@
                             </dependency>
                         </dependencies>
                         <configuration>
+                            <!--suppress UnresolvedMavenProperty -->
                             <repoToken>${COVERALLS_TOKEN}</repoToken>
                         </configuration>
                     </plugin>
