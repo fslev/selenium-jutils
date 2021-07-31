@@ -1,7 +1,9 @@
 # Changelog
 
-### 1.4-SNAPSHOT
+### 1.5-SNAPSHOT
 
+### 1.4
+Update dependencies  
 
 ### 1.3
 Update dependencies (Optimized Polling - jtest-utils)  
