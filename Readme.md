@@ -134,5 +134,5 @@ It comes with [**jtest-utils**](https://github.com/fslev/jtest-utils), which is 
 
 ## Showcase
 This [**tutorial**](https://github.com/fslev/cucumber-selenium-tutorial)
-shows you how to test a website with Selenium and Cucumber for Java
+shows you how to test a website user interface with Selenium and Cucumber for Java
 
