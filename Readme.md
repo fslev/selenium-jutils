@@ -5,7 +5,7 @@
 
 A light Java library designed to tackle the shortcomings of Selenium Page Object Model and Page Factory features.  
 It provides the following enhancements:
-- __WebContext__, used for locating web elements relative to a parent element  
+- __WebContext__, used for locating web elements relative to the parent search context  
 - __Retry on error mechanism__, activated when a specific error or exception occurs while locating and interacting with a web element, such as StaleElementReferenceException.  
 
 ### Maven Central
@@ -130,9 +130,9 @@ docker-compose -f selenium-grid.yml up
 ```
 
 ## Other features
-It comes with [**jtest-utils**](https://github.com/fslev/jtest-utils), which is a friendly library used for matching different types of objects, for making HTTP requests, SQL database queries, etc.  
+It comes with [**jtest-utils**](https://github.com/fslev/jtest-utils), which is a friendly library with different features for testing: matching different types of objects, making HTTP requests, polling mechanism, etc.  
 
 ## Showcase
 This [**tutorial**](https://github.com/fslev/cucumber-selenium-tutorial)
-shows you how to test a website with Selenium and Cucumber for Java
+shows you how to test a website user interface with Selenium and Cucumber for Java
 
