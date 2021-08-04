@@ -1,6 +1,9 @@
 # Changelog
 
-### 1.5-SNAPSHOT
+### 1.6-SNAPSHOT
+
+### 1.5
+Update dependencies  
 
 ### 1.4
 Update dependencies  
