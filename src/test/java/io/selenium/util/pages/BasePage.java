@@ -18,4 +18,8 @@ public class BasePage {
         PageFactory.initElements(new FieldContextDecorator(new ElementContextLocatorFactory(
                 driver, Duration.ofSeconds(12), Collections.singletonList(StaleElementReferenceException.class))), this);
     }
+
+    public WebDriver getDriver() {
+        return driver;
+    }
 }
