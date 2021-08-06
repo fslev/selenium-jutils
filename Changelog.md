@@ -1,6 +1,9 @@
 # Changelog
 
-### 1.6-SNAPSHOT
+### 1.7-SNAPSHOT
+
+### 1.6
+Remove WebDriver interface from proxy supported interfaces  
 
 ### 1.5
 Update dependencies  
