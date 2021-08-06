@@ -69,7 +69,7 @@ public class ContextTest {
         item = list.get(3);
         assertEquals("Baking item4", item.getSearchContext().findElement(By.cssSelector("span")).getText());
         assertEquals("Baking item4", item.getItemWebElement().findElement(By.xpath("./span")).getText());
-        assertEquals("Baking item4", ((WebDriver) item.getSearchContext()).findElement(By.cssSelector("span")).getText());
+        assertEquals("Baking item4", item.getSearchContext().findElement(By.cssSelector("span")).getText());
         new WebDriverWait((WebDriver) item.getSearchContext(), Duration.ofSeconds(5)).until(ExpectedConditions.textToBe(By.cssSelector("span"), "Baking item4"));
     }
 
