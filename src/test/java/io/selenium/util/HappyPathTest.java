@@ -2,9 +2,9 @@ package io.selenium.util;
 
 import io.selenium.util.pages.happtpath.GroceryListTab;
 import io.selenium.util.pages.happtpath.GroceryPage;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -14,7 +14,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class HappyPathTest {
 
@@ -23,7 +23,7 @@ public class HappyPathTest {
 
     private WebDriver driver;
 
-    @Before
+    @BeforeEach
     public void init() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
         driver = new RemoteWebDriver(new URL(SELENIUM_HUB_URL), options);
@@ -56,7 +56,7 @@ public class HappyPathTest {
         try {
             lastItem.getRemoveButton().click();
             fail("Last Item shouldn't be accessible any more");
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException ignored) {
         }
         // Refresh last item
         lastItem = list.get(4);
@@ -131,7 +131,7 @@ public class HappyPathTest {
         fail("Invalid Grocery List Context should fail with NoSuchElementException");
     }
 
-    @After
+    @AfterEach
     public void cleanup() {
         if (driver != null) {
             driver.quit();

@@ -2,9 +2,9 @@ package io.selenium.util;
 
 import io.selenium.util.pages.many.GroceryListTab;
 import io.selenium.util.pages.many.GroceryPage;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -14,8 +14,8 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class FindByManyTest {
 
@@ -24,7 +24,7 @@ public class FindByManyTest {
 
     private WebDriver driver;
 
-    @Before
+    @BeforeEach
     public void init() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
         driver = new RemoteWebDriver(new URL(SELENIUM_HUB_URL), options);
@@ -53,7 +53,7 @@ public class FindByManyTest {
         try {
             lastItem.getRemoveButton().click();
             fail("Last Item shouldn't be accessible any more");
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException ignored) {
         }
         // Refresh last item
         lastItem = list.get(4);
@@ -71,7 +71,7 @@ public class FindByManyTest {
         assertEquals("Custom baking item1", lastItem.getName().getText());
     }
 
-    @After
+    @AfterEach
     public void cleanup() {
         if (driver != null) {
             driver.quit();

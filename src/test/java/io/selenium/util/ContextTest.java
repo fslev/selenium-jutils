@@ -4,9 +4,9 @@ import io.selenium.util.pages.context.DepartmentsTab;
 import io.selenium.util.pages.context.GroceryListTab;
 import io.selenium.util.pages.context.GroceryPage;
 import io.selenium.util.pages.context.InvalidGroceryPage;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,7 +20,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ContextTest {
 
@@ -29,7 +29,7 @@ public class ContextTest {
 
     private WebDriver driver;
 
-    @Before
+    @BeforeEach
     public void init() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
         driver = new RemoteWebDriver(new URL(SELENIUM_HUB_URL), options);
@@ -81,7 +81,7 @@ public class ContextTest {
         try {
             invalidDepartments.get(0).getContents().size();
             fail("Should fail. WebContext with one argument constructor");
-        } catch (RuntimeException e) {
+        } catch (RuntimeException ignored) {
         }
         try {
             new InvalidGroceryPage(driver);
@@ -91,7 +91,7 @@ public class ContextTest {
         }
     }
 
-    @After
+    @AfterEach
     public void cleanup() {
         if (driver != null) {
             driver.quit();
