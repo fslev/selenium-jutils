@@ -1,7 +1,10 @@
 # Changelog
 
-### 1.8-SNAPSHOT
+### 1.9-SNAPSHOT
 
+### 1.8
+Update dependencies  
+Use Junit Jupiter API  
 
 ### 1.7
 Update dependencies  
