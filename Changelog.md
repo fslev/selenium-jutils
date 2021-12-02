@@ -1,7 +1,9 @@
 # Changelog
 
-### 1.10-SNAPSHOT
+### 1.11-SNAPSHOT
 
+### 1.10
+Update dependencies  
 
 ### 1.9
 Update dependencies  
