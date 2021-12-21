@@ -1,6 +1,9 @@
 # Changelog
 
-### 1.12-SNAPSHOT
+### 1.13-SNAPSHOT
+
+### 1.12
+Update jtest-utils dependency (Jackson update and Log4j major vulnerability fix: 2.17.0)  
 
 ### 1.11
 Update dependencies  
