@@ -19,7 +19,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jtest.utils.version>1.61</jtest.utils.version>
+        <jtest.utils.version>1.62</jtest.utils.version>
         <selenium.java.min.version>4.0.0</selenium.java.min.version>
     </properties>
 
