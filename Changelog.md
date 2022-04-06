@@ -1,7 +1,9 @@
 # Changelog
 
-### 1.15-SNAPSHOT
+### 1.16-SNAPSHOT
 
+### 1.15
+Update dependencies  
 
 ### 1.14
 Update dependencies  
