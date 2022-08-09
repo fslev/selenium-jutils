@@ -1,6 +1,9 @@
 # Changelog
 
-### 1.20-SNAPSHOT
+### 1.21-SNAPSHOT
+
+### 1.20  
+Update dependencies  
 
 ### 1.19
 Update dependencies  
