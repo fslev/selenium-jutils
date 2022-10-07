@@ -1,6 +1,9 @@
 # Changelog
 
-### 1.21-SNAPSHOT
+### 1.22-SNAPSHOT
+
+### 1.21 (2022-10-07)
+- Dependency updates
 
 ### 1.20  
 Update dependencies  
