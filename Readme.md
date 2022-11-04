@@ -131,9 +131,6 @@ You need to start Selenium Grid and the Grocery application via docker compose, 
 docker-compose -f selenium-grid.yml up
 ```
 
-## Other features
-It comes with [**jtest-utils**](https://github.com/fslev/jtest-utils), which is a friendly library with different features for testing: matching different types of objects, making HTTP requests, polling mechanism, etc.  
-
 ## Showcase
 This [**tutorial**](https://github.com/fslev/cucumber-selenium-tutorial)
 shows you how to test a website user interface with Selenium and Cucumber for Java
