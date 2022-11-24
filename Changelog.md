@@ -1,6 +1,10 @@
 # Changelog
 
-### 1.22-SNAPSHOT
+### 1.23-SNAPSHOT
+
+## 1.22 (2022-11-24)
+- #### Changed
+    - Update dependencies (jtest-utils 5.1)
 
 ### 1.21 (2022-10-07)
 - Dependency updates
