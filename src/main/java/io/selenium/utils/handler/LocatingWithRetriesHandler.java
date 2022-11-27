@@ -23,6 +23,7 @@ public abstract class LocatingWithRetriesHandler extends Retry implements Invoca
     @Override
     public Object invoke(Object object, Method method, Object[] objects) throws Throwable {
         AtomicReference<Object> result = new AtomicReference<>();
+        AtomicReference<Throwable> lastTrouble = new AtomicReference<>();
         Polling<Throwable> polling = new Polling<Throwable>().duration(duration, POLLING_INTERVAL_MILLIS)
                 .supplier(() -> {
                     try {
@@ -31,6 +32,7 @@ public abstract class LocatingWithRetriesHandler extends Retry implements Invoca
                     } catch (Throwable t) {
                         if (troubles.contains(t.getClass())) {
                             LOG.info("Caught throwable {}. Retry element invocation...", t.getClass().getCanonicalName());
+                            lastTrouble.set(t);
                         }
                         return t;
                     }
@@ -43,7 +45,7 @@ public abstract class LocatingWithRetriesHandler extends Retry implements Invoca
                 throw throwable;
             }
         } catch (PollingTimeoutException e) {
-            throw polling.getLastResult();
+            throw lastTrouble.get();
         }
     }
 
