@@ -16,7 +16,7 @@ import java.time.Duration;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class CachedLookupTest {
@@ -54,16 +54,10 @@ public class CachedLookupTest {
         firstItem.getRemoveButton().click();
         lastItem.getRemoveButton().click();
         assertEquals("Baking item2", item2.getName().getText());
-        try {
-            firstItem.getName().getText();
-            fail("Should throw stale element reference exception");
-        } catch (StaleElementReferenceException ignored) {
-        }
-        try {
-            lastItem.getName().getText();
-            fail("Should throw stale element reference exception");
-        } catch (StaleElementReferenceException ignored) {
-        }
+        assertThrows(StaleElementReferenceException.class, () ->
+                firstItem.getName().getText(), "Should throw stale element reference exception");
+        assertThrows(StaleElementReferenceException.class, () ->
+                lastItem.getName().getText(), "Should throw stale element reference exception");
     }
 
     @Test
