@@ -1,6 +1,9 @@
 # Changelog
 
-### 1.24-SNAPSHOT
+### 1.25-SNAPSHOT
+
+### 1.24 (2023-04-26)
+  - Update dependencies (jtest-utils 5.7)
 
 ## 1.23 (2022-11-27)
 - #### Changed
