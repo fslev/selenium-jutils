@@ -12,7 +12,12 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Proxy;
+import java.lang.reflect.Type;
 import java.util.List;
 
 public class FieldContextDecorator implements FieldDecorator {
@@ -60,11 +65,9 @@ public class FieldContextDecorator implements FieldDecorator {
 
         Class<?> listType = (Class<?>) ((ParameterizedType) genericType).getActualTypeArguments()[0];
 
-        if (!aClass.equals(WebElement.class) && !aClass.equals(WebContext.class)) {
-            return false;
-        } else if (aClass.equals(WebElement.class) && !aClass.equals(listType)) {
-            return false;
-        } else if (aClass.equals(WebContext.class) && !aClass.isAssignableFrom(listType)) {
+        if ((!aClass.equals(WebElement.class) && !aClass.equals(WebContext.class)) ||
+                (aClass.equals(WebElement.class) && !aClass.equals(listType)) ||
+                (aClass.equals(WebContext.class) && !aClass.isAssignableFrom(listType))) {
             return false;
         }
 
@@ -92,7 +95,8 @@ public class FieldContextDecorator implements FieldDecorator {
             PageFactory.initElements(new FieldContextDecorator(
                     new ElementContextLocatorFactory(contextElement, factory.getDuration(), factory.getTroubles())), context);
             return context;
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
+                 InvocationTargetException e) {
             throw new RuntimeException("Cannot create instance from : " + field.getType(), e);
         }
     }

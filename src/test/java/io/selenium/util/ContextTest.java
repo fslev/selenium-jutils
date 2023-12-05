@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ContextTest {
 
-    private static final String SELENIUM_HUB_URL = "http://localhost:4444";
+    private static final String SELENIUM_HUB_URL = "http://localhost:4445";
     private static final String GROCERY_APP_URL = "http://grocery-list:80";
 
     private WebDriver driver;
