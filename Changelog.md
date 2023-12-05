@@ -1,6 +1,10 @@
 # Changelog
 
-## 1.25-SNAPSHOT
+## 1.26-SNAPSHOT
+
+## 1.25 (2023-05-12)
+- #### Changed
+  - Replaced JTest-Utils Polling with  [Awaitility](https://github.com/awaitility/awaitility)
 
 ## 1.24 (2023-04-26)
 - #### Changed
