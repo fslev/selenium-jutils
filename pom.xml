@@ -21,7 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jtest.utils.version>5.17</jtest.utils.version>
         <selenium.java.min.version>4.0.0</selenium.java.min.version>
-        <awaitility.version>4.2.1</awaitility.version>
+        <awaitility.version>4.2.2</awaitility.version>
     </properties>
 
     <dependencies>
